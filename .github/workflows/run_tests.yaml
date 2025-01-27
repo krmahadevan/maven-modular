@@ -110,19 +110,11 @@ jobs:
           echo "branch_name=$PR_BRANCH" >> $GITHUB_OUTPUT
           echo "commit_sha=$PR_COMMIT_SHA" >> $GITHUB_OUTPUT
 
-      # Step 7: Fetch the master branch from the remote to compare with the current branch
-      - name: Fetch origin/master
-        run: git fetch origin master
-
-      # Step 8: Evaluate coverage diff
+      # Step 7: Evaluate coverage diff
       - name: Evaluate Coverage Diff
         id: diff-coverage
         shell: bash
         run: |
-          # Generating the diff
-          # git fetch origin ${{ steps.get_branch.outputs.branch_name }}
-          # git checkout master
-          # git checkout ${{ steps.get_branch.outputs.branch_name }}
           git diff origin/master...HEAD > diff.txt
           echo "Printing the diff"
           cat diff.txt
